@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactividad con Grid</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f9fc;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #005f99;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        /* Contenedor de los botones */
+        .buttons-container {
+            margin-bottom: 20px;
+        }
+
+        .buttons-container button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons-container button:hover {
+            background-color: #005f99;
+        }
+
+        /* Contenedor de grid dinámico */
+        .grid-container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-example {
+            display: grid;
+            background-color: #e6e6e6;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .grid-example div {
+            background-color: #d9f0ff;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Propiedad Grid en CSS</h1>
+
+    <!-- Botones para cambiar el ejemplo -->
+    <div class="buttons-container">
+        <button onclick="mostrarEjemplo('columns')">Grid Template Columns</button>
+        <button onclick="mostrarEjemplo('gap')">Grid Gap</button>
+        <button onclick="mostrarEjemplo('justify')">Justify Items y Align Items</button>
+        <button onclick="mostrarEjemplo('areas')">Grid Areas</button>
+    </div>
+
+    <!-- Contenedor de grid dinámico -->
+    <div id="grid-container" class="grid-container">
+        <!-- El contenido de este div cambiará dinámicamente -->
+    </div>
+
+    <script>
+        // Función para mostrar los ejemplos dinámicos
+        function mostrarEjemplo(tipo) {
+            const container = document.getElementById('grid-container');
+            let contenido = '';
+
+            if (tipo === 'columns') {
+                contenido = `
+                    <h2>Grid Template Columns</h2>
+                    <p>Define cómo se distribuyen las columnas en la cuadrícula.</p>
+                    <div class="grid-example" style="grid-template-columns: 1fr 2fr;">
+                        <div>Columna 1</div>
+                        <div>Columna 2</div>
+                    </div>
+                `;
+            } else if (tipo === 'gap') {
+                contenido = `
+                    <h2>Grid Gap</h2>
+                    <p>Define el espacio entre filas y columnas de la cuadrícula.</p>
+                    <div class="grid-example" style="grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                    </div>
+                `;
+            } else if (tipo === 'justify') {
+                contenido = `
+                    <h2>Justify Items y Align Items</h2>
+                    <p>Controla la alineación de los elementos dentro de las celdas de la cuadrícula.</p>
+                    <div class="grid-example" style="grid-template-columns: repeat(2, 1fr); justify-items: center; align-items: center; height: 150px;">
+                        <div>Centro</div>
+                        <div>Centro</div>
+                        <div>Centro</div>
+                        <div>Centro</div>
+                    </div>
+                `;
+            } else if (tipo === 'areas') {
+                contenido = `
+                    <h2>Grid Areas</h2>
+                    <p>Permite nombrar y organizar áreas específicas dentro de la cuadrícula.</p>
+                    <div class="grid-example" style="
+                        grid-template-areas: 
+                            'header header'
+                            'sidebar content';
+                        grid-template-columns: 1fr 2fr;
+                        grid-template-rows: 50px 150px;
+                    ">
+                        <div style="grid-area: header; background-color: #b3e5fc;">Header</div>
+                        <div style="grid-area: sidebar; background-color: #81d4fa;">Sidebar</div>
+                        <div style="grid-area: content; background-color: #4fc3f7;">Content</div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = contenido;
+        }
+
+        // Mostrar un ejemplo inicial al cargar la página
+        mostrarEjemplo('columns');
+    </script>
+</body>
+</html>

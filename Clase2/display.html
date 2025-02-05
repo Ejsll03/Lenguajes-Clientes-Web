@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propiedad Display</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc; /* Fondo claro */
+            color: #333; /* Texto oscuro */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #005f99; /* Azul oscuro */
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        /* Estilo para secciones de ejemplos */
+        .section {
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff; /* Fondo blanco */
+        }
+
+        .section h2 {
+            color: #007acc;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para los elementos de cada ejemplo */
+        .block {
+            display: block;
+            background-color: #cce7ff; /* Azul claro */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .inline {
+            display: inline;
+            background-color: #c3f7d7; /* Verde claro */
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .flex {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            background-color: #e6e6e6; /* Gris claro */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flex div {
+            background-color: #d9f0ff; /* Azul más suave */
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            flex: 1;
+            text-transform: capitalize;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background-color: #fffbe6; /* Amarillo claro */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .grid div {
+            background-color: #ffeaa7; /* Amarillo suave */
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Propiedad Display en CSS</h1>
+
+    <!-- Ejemplo de Block -->
+    <div class="section">
+        <h2>Display: Block</h2>
+        <div class="block">Elemento Block</div>
+    </div>
+
+    <!-- Ejemplo de Inline -->
+    <div class="section">
+        <h2>Display: Inline</h2>
+        <span class="inline">Elemento Inline 1</span>
+        <span class="inline">Elemento Inline 2</span>
+    </div>
+
+    <!-- Ejemplo de Flex -->
+    <div class="section">
+        <h2>Display: Flex</h2>
+        <div class="flex">
+            <div>Flex 1</div>
+            <div>Flex 2</div>
+            <div>Flex 3</div>
+            <div>Flex 4</div>
+        </div>
+    </div>
+
+    <!-- Ejemplo de Grid -->
+    <div class="section">
+        <h2>Display: Grid</h2>
+        <div class="grid">
+            <div>Grid 1</div>
+            <div>Grid 2</div>
+            <div>Grid 3</div>
+            <div>Grid 4</div>
+        </div>
+    </div>
+</body>
+</html>
