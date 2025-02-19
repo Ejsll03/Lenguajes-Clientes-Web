@@ -57,16 +57,16 @@ function createNewMatrix() {
             <input type="number" id="col${matrixName}" min="1" placeholder="Columnas">
             <button id="generateMatrix${matrixName}">Generar Matriz ${matrixName}</button>
         </div>
+        <div class="scalar-container">
+            <button id="scalarMultiplyBtn${matrixName}" style="display: none;">Multiplicar por Escalar</button>
+            <input type="number" id="scalarValue${matrixName}" placeholder="Escalar" style="display: none;">
+        </div>
         <div class="matrixOperations">
-            <div class="scalar-container">
-                <button id="scalarMultiplyBtn${matrixName}" style="display: none;">Multiplicar por Escalar</button>
-                <input type="number" id="scalarValue${matrixName}" placeholder="Escalar" style="display: none;">
-            </div>
             <button id="transposeBtn${matrixName}" style="display: none;">Traspuesta</button>
             <button id="determinantBtn${matrixName}" style="display: none;">Determinante</button>
             <button id="inverseBtn${matrixName}" style="display: none;">Inversa</button>
             <button id="identityBtn${matrixName}" style="display: none;">Identidad</button>
-            </div>`;
+        </div>`;
     matricesContainer.appendChild(matrixDiv);
 
     // Asignar evento para generar la matriz
@@ -126,7 +126,6 @@ function createNewMatrix() {
     });
 
     // Asignar evento para matriz identidad
-    let identityMatrixResult = []; // Variable para guardar la matriz identidad
 
     document.getElementById(`identityBtn${matrixName}`).addEventListener('click', () => {
         Matrix = getMatrixValues(`matrix${matrixName}`);
@@ -137,7 +136,7 @@ function createNewMatrix() {
         } 
     
         const identityMatrixResult = identityMatrix(Matrix.length);
-        displayMatrix(identityMatrixResult, 'identityMatrix');
+        displayMatrix(identityMatrixResult, 'resultMatrix');
     });
     
 
@@ -225,4 +224,3 @@ document.getElementById('multiplyBtn').addEventListener('click', () => {
     const result = multiplyMatrices(matrixA, matrixB);
     displayMatrix(result, 'resultMatrix');
 });
-
