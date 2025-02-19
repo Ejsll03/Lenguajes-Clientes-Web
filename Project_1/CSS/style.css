@@ -1,0 +1,185 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+    background: linear-gradient(82.3deg, rgb(205, 235, 245) 0%, rgb(181, 201, 244) 100%);
+    color: #333;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.matrices {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.matrix {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 45%; /* Ajusta el ancho de las matrices */
+}
+
+.matrix:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.result {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 90%; /* Ajusta el ancho del resultado */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="number"] {
+    width: 80px; /* Aumenta el ancho de los campos de entrada */
+    margin: 5px;
+    color: #333;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus {
+    border-color: #2c3e50;
+    box-shadow: 0 0 8px rgba(44, 62, 80, 0.2);
+    outline: none;
+}
+
+.Btn {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.Btn button, .matrices button, .matrixOperations button, .operations button {
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1;
+}
+
+.Btn button:hover, .matrices button:hover, .matrixOperations button:hover, .operations button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.Btn button:active, .matrices button:active, .matrixOperations button:active, .operations button:active {
+    transform: scale(0.95);
+}
+
+#createMatrixBtn {
+    background: #4CAF50;
+}
+
+#deleteMatrixSelect {
+    border-radius: 1.4rem;
+    height: 3rem;
+    padding: 0 2rem;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#deleteMatrixSelect:hover {
+    background-color: #c0392b;
+}
+
+.operations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.matrixOperations {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#resultMatrix, #identityMatrix {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Ajusta el ancho del resultado */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="number"] {
+    -appearance: textfield; /* Firefox */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Safari y Chrome */
+    margin: 0;
+}
+
+.scalar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el input y el botón */
+    justify-content: center;
+}
+
+.scalar-container input {
+    width: 100px; /* Ajusta el tamaño del input */
+}
+
+.scalar-container button {
+    height: 3rem;
+    width: 35rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
