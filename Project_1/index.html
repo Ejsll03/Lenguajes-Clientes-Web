@@ -14,13 +14,13 @@
     <select id="deleteMatrixSelect">
         <option id="deleteBtn" value="">Eliminar</option>
     </select>
+    <div class="operations">
+      <button id="addBtn" style="display: none;">Sumar</button>
+      <button id="subtractBtn" style="display: none;">Restar</button>
+      <button id="multiplyBtn" style="display: none;">Multiplicar</button>
+    </div>
   </div>
 
-  <div class="operations">
-    <button id="addBtn" style="display: none;">Sumar</button>
-    <button id="subtractBtn" style="display: none;">Restar</button>
-    <button id="multiplyBtn" style="display: none;">Multiplicar</button>
-  </div>
 
   <div class="matrices">
     <!-- Aquí se agregarán dinámicamente las matrices -->
@@ -30,7 +30,6 @@
   <div class="result">
     <h2>Resultado</h2>
     <div id="resultMatrix"></div>
-    <div id="identityMatrix"></div>
   </div>
 
   <script type="module" src="js/script.js"></script>
