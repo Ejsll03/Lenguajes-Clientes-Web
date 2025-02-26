@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promesas en JavaScript</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .highlight {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #ecf0f1;
+            border-left: 5px solid #3498db;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📌 Promesas en JavaScript</h1>
+
+        <div class="section">
+            <h2>🔹 ¿Qué es una Promesa?</h2>
+            <p>Una <strong>Promesa</strong> en JavaScript es un objeto que representa un valor que puede estar disponible ahora, en el futuro o nunca. Se utiliza para manejar operaciones asincrónicas.</p>
+            <p>Las promesas tienen tres estados principales:</p>
+            <ul>
+                <li><span class="highlight">Pending</span>: La promesa se encuentra en espera, aún no se ha completado ni fallado.</li>
+                <li><span class="highlight">Fulfilled</span>: La promesa se ha completado con éxito.</li>
+                <li><span class="highlight">Rejected</span>: La promesa ha fallado.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔹 Creación de una Promesa</h2>
+            <p>Podemos crear una promesa usando el constructor <code>Promise</code>, que recibe una función con dos parámetros: <code>resolve</code> y <code>reject</code>.</p>
+            <div class="code-block">
+                const miPromesa = new Promise((resolve, reject) => {
+                    let exito = true;
+                    setTimeout(() => {
+                        if (exito) {
+                            resolve("Operación completada con éxito");
+                        } else {
+                            reject("Hubo un error en la operación");
+                        }
+                    }, 2000);
+                });
+
+                miPromesa.then(mensaje => console.log(mensaje))
+                         .catch(error => console.error(error));
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔹 Encadenamiento de Promesas</h2>
+            <p>Las promesas permiten encadenar operaciones usando <code>then()</code>.</p>
+            <div class="code-block">
+                function tareaUno() {
+                    return new Promise(resolve => {
+                        setTimeout(() => resolve("Tarea 1 completada"), 1000);
+                    });
+                }
+
+                function tareaDos() {
+                    return new Promise(resolve => {
+                        setTimeout(() => resolve("Tarea 2 completada"), 2000);
+                    });
+                }
+
+                tareaUno()
+                    .then(resultado => {
+                        console.log(resultado);
+                        return tareaDos();
+                    })
+                    .then(resultado => console.log(resultado))
+                    .catch(error => console.error("Error:", error));
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔹 Métodos útiles de Promesas</h2>
+            <ul>
+                <li><span class="highlight">Promise.all()</span>: Espera a que todas las promesas se resuelvan.</li>
+                <li><span class="highlight">Promise.race()</span>: Retorna la primera promesa que se resuelva.</li>
+                <li><span class="highlight">Promise.any()</span>: Retorna la primera promesa <em>fulfilled</em>.</li>
+            </ul>
+            <div class="code-block">
+                const p1 = new Promise(res => setTimeout(() => res("Uno"), 3000));
+                const p2 = new Promise(res => setTimeout(() => res("Dos"), 1000));
+
+                Promise.all([p1, p2]).then(console.log);
+                Promise.race([p1, p2]).then(console.log);
+                Promise.any([p1, p2]).then(console.log);
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔹 Async/Await</h2>
+            <p>Una forma más sencilla de manejar promesas es utilizando <code>async/await</code>.</p>
+            <div class="code-block">
+                async function obtenerDatos() {
+                    try {
+                        let respuesta = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+                        let datos = await respuesta.json();
+                        console.log(datos);
+                    } catch (error) {
+                        console.error("Error en la solicitud", error);
+                    }
+                }
+                obtenerDatos();
+            </div>
+        </div>
+    </div>
+</body>
+</html>
