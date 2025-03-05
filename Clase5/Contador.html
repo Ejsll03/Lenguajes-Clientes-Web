@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Contador {
+  constructor() {
+    this.valor = 0;
+  }
+
+  incrementar() {
+    this.valor++;
+    this.actualizar();
+  }
+
+  render() {
+    this.elemento = document.createElement("div");
+
+    // Aplicar estilos al contenedor
+    this.elemento.style.padding = "20px";
+    this.elemento.style.border = "1px solid #ddd";
+    this.elemento.style.borderRadius = "8px";
+    this.elemento.style.width = "200px";
+    this.elemento.style.textAlign = "center";
+    this.elemento.style.margin = "20px auto";
+
+    const boton = document.createElement("button");
+    boton.textContent = "Incrementar";
+    boton.addEventListener("click", () => this.incrementar());
+
+    // Estilos para el botón
+    boton.style.padding = "10px 15px";
+    boton.style.backgroundColor = "#27ae60";
+    boton.style.color = "white";
+    boton.style.border = "none";
+    boton.style.borderRadius = "5px";
+    boton.style.cursor = "pointer";
+    boton.style.marginTop = "10px";
+
+    this.mostrador = document.createElement("span");
+    this.mostrador.textContent = `Valor: ${this.valor}`;
+    this.mostrador.style.display = "block";
+    this.mostrador.style.marginBottom = "10px";
+    this.mostrador.style.fontSize = "18px";
+
+    this.elemento.appendChild(this.mostrador);
+    this.elemento.appendChild(boton);
+
+    return this.elemento;
+  }
+
+  actualizar() {
+    this.mostrador.textContent = `Valor: ${this.valor}`;
+  }
+}
+
+const contador = new Contador();
+document.body.appendChild(contador.render());
+
+
+    </script>
+</body>
+
+</html>
