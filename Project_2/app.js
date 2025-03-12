@@ -33,8 +33,8 @@ async function cargarTareas() {
 
         mostrarToast(`Se han cargado ${tareas.length} tareas.`, "success");
     } catch (error) {
-        console.error("Error al cargar tareas:", error);
-        mostrarToast("Error al cargar tareas.", "error");
+        console.error("Error loading tasks:", error);
+        mostrarToast("Error loading tasks.", "error");
     }
 }
 
@@ -70,7 +70,7 @@ async function crearTarea() {
         });
 
         if (!response.ok) {
-            throw new Error("Error al agregar tarea");
+            throw new Error("Error adding task");
         }
 
         const tareaCreada = await response.json();
@@ -80,8 +80,8 @@ async function crearTarea() {
         
         mostrarToast(`Tarea creada: ${tareaCreada.id} - ${tareaCreada.title}.`, "success");
     } catch (error) {
-        console.error("Error al crear tarea:", error);
-        mostrarToast("Error al crear tarea.", "error");
+        console.error("Error creating task:", error);
+        mostrarToast("Error creating task.", "error");
     }
 }
 
@@ -132,13 +132,13 @@ async function eliminarTarea(id, title, tareaElemento) {
         });
 
         if (!response.ok) {
-            throw new Error("Error al eliminar tarea");
+            throw new Error("Error deleting task");
         }
 
         tareaElemento.remove(); // Elimina la tarea de la lista
-        mostrarToast(`Tarea eliminada: ${id} - ${title}.`, "error");
+        mostrarToast(`Task deleted: ${id} - ${title}.`, "error");
     } catch (error) {
-        console.error("Error al eliminar tarea:", error);
-        mostrarToast("Error al eliminar tarea.", "error");
+        console.error("Error deleting task:", error);
+        mostrarToast("Error deleting task.", "error");
     }
 }
