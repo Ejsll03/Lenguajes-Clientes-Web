@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoría y Ejemplos de Fetch en JavaScript</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #003366;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #003366;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #004d99;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f4f4f4;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 15px;
+            word-wrap: break-word;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Estilos para los ejemplos */
+        .example {
+            background-color: #e8f4ff;
+            padding: 20px;
+            border-left: 5px solid #003366;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .example pre {
+            background-color: #333;
+            color: #000000;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        /* Estilos para el footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #003366;
+            color: white;
+            font-size: 14px;
+            margin-top: 40px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para enlaces */
+        a {
+            color: #004d99;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos para la tabla de ejemplos */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #003366;
+            color: rgb(12, 7, 20);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Teoría y Ejemplos de la Función <code>fetch()</code> en JavaScript</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>¿Qué es la función <code>fetch()</code>?</h2>
+            <p>
+                La función <code>fetch()</code> es una API moderna de JavaScript que permite realizar solicitudes HTTP asincrónicas para interactuar con recursos web. Es ampliamente utilizada para obtener datos de servidores o APIs REST, y reemplaza a la antigua tecnología de <code>XMLHttpRequest</code>.
+            </p>
+            <p>
+                <code>fetch()</code> devuelve una promesa que se resuelve con el objeto <code>Response</code> de la solicitud, permitiendo acceder a los datos de manera eficiente. Es especialmente útil para trabajar con APIs que devuelven datos en formato JSON.
+            </p>
+        </section>
+
+        <section>
+            <h2>Sintaxis de <code>fetch()</code></h2>
+            <p>
+                La sintaxis básica de <code>fetch()</code> es la siguiente:
+            </p>
+            <pre><code>fetch(url, opciones)</code></pre>
+            <p>
+                Donde:
+            </p>
+            <ul>
+                <li><strong>url</strong>: La URL del recurso al que se desea acceder.</li>
+                <li><strong>opciones</strong>: Un objeto opcional que permite configurar la solicitud (como el método HTTP, cabeceras, cuerpo de la solicitud, etc.).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejemplo Básico de <code>fetch()</code></h2>
+            <div class="example">
+                <h3>Descripción</h3>
+                <p>
+                    Este ejemplo muestra cómo realizar una solicitud GET para obtener datos desde una API ficticia. La respuesta se procesa y se muestra en la consola del navegador.
+                </p>
+                <pre><code>fetch('https://api.example.com/datos')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Ejemplo con Envío de Datos (POST)</h2>
+            <div class="example">
+                <h3>Descripción</h3>
+                <p>
+                    En este ejemplo, mostramos cómo enviar datos a un servidor utilizando el método POST. Los datos se envían como un objeto JSON en el cuerpo de la solicitud.
+                </p>
+                <pre><code>const datos = {
+  nombre: 'Juan',
+  edad: 30
+};
+
+fetch('https://api.example.com/usuarios', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(datos)
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Trabajar con Promesas y <code>async</code> / <code>await</code></h2>
+            <p>
+                En lugar de usar las funciones <code>.then()</code> y <code>.catch()</code>, podemos utilizar <code>async</code> y <code>await</code> para hacer que el código sea más limpio y fácil de leer.
+            </p>
+            <div class="example">
+                <h3>Descripción</h3>
+                <p>
+                    Este ejemplo muestra cómo utilizar <code>async</code> y <code>await</code> con <code>fetch()</code> para obtener datos de manera secuencial.
+                </p>
+                <pre><code>async function obtenerDatos() {
+  try {
+    const response = await fetch('https://api.example.com/datos');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+obtenerDatos();</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Controlando el Estado de la Respuesta</h2>
+            <p>
+                Es importante verificar el estado de la respuesta para asegurarse de que la solicitud se completó correctamente antes de procesar los datos.
+            </p>
+            <div class="example">
+                <h3>Descripción</h3>
+                <p>
+                    Aquí mostramos cómo manejar el estado de la respuesta HTTP antes de procesar los datos.
+                </p>
+                <pre><code>fetch('https://api.example.com/datos')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('La solicitud falló con estado ' + response.status);
+    }
+    return response.json();
+  })
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Teoría y Ejemplos de Fetch - Desarrollado por OpenAI</p>
+    </footer>
+
+</body>
+</html>
