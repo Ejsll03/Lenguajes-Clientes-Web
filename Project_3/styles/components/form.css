@@ -1,0 +1,226 @@
+.transaction-form, .budget-form {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 24px;
+    margin-bottom: 20px;
+}
+  
+.form-group {
+    margin-bottom: 15px;
+}
+  
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+  
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: var(--secondary-color);
+    color: var(--text-primary);
+}
+  
+button {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+  
+button:hover {
+    opacity: 0.9;
+}
+  
+button.delete {
+    background-color: var(--danger-color);
+}
+  
+button.delete:hover {
+    opacity: 0.9;
+}
+
+button.delete-btn {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 18px;
+}
+
+button.delete-btn i {
+  color: white;
+}
+
+button.delete-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.5);
+}
+
+button.edit-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 18px;
+}
+
+button.edit-btn i {
+  color: white;
+}
+
+button.edit-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.5);
+}
+
+button.save-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 20px;
+}
+
+button.save-btn i {
+  color: white;
+}
+
+button.save-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.5);
+}
+
+.category-manager {
+    padding: 20px;
+}
+  
+.category-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+  
+.category-form input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background: var(--secondary-color);
+    color: var(--text-primary);
+}
+  
+.category-list {
+    list-style: none;
+    padding: 0;
+}
+  
+.category-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+  
+.category-list li:last-child {
+    border-bottom: none;
+}
+  
+.category-name {
+    flex-grow: 1;
+    color: var(--text-primary);
+}
+  
+.delete-category {
+    background-color: var(--danger-color);
+    color: var(--text-primary);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+  
+.delete-category:hover {
+    opacity: 0.9;
+}
+
+/* Estilos para el formulario de presupuesto */
+.budget-form .form-group {
+    margin-bottom: 15px;
+}
+
+.budget-form select, 
+.budget-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+.budget-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.budget-amount-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.budget-amount-group input {
+  flex: 1;
+}
+
+.budget-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.budget-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.budget-list li:last-child {
+  border-bottom: none;
+}

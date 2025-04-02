@@ -1,0 +1,83 @@
+.chart-container {
+    width: 60%;
+    height: 320px;
+    padding: 10px;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Remove spinner buttons from number inputs */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.tab-content {
+    min-height: 400px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.year-selector {
+    padding: 8px;
+    background: var(--card-background);
+    border-radius: 8px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.year-selector label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.year-selector select {
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 320px;
+}
+
+@media (max-height: 800px) {
+    .chart-container {
+        height: 300px;
+    }
+    canvas {
+        max-height: 300px;
+    }
+}
+
+@media (max-height: 700px) {
+    .chart-container {
+        height: 280px;
+    }
+    canvas {
+        max-height: 280px;
+    }
+}

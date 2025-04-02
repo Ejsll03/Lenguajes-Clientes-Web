@@ -1,0 +1,421 @@
+.dashboard-container {
+    padding: 5px 20px 20px 20px;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 24px;
+}
+
+.main-section {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 12px;
+}
+
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dashboard-header h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+.dashboard-header p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+}
+
+.period-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--secondary-color);
+    padding: 6px 12px;
+    border-radius: 12px;
+    width: fit-content;
+    margin-top: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.period-selector:hover {
+    opacity: 0.8;
+}
+
+.calendar-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--primary-color);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.calendar-btn:hover {
+    transform: scale(1.1);
+}
+
+.period-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Estilos para el input de tipo month */
+input[type="month"] {
+    color: var(--text-primary);
+    background: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.balance-card {
+    background: var(--card-background);
+    padding: 24px;
+    border-radius: 24px;
+}
+
+.balance-amount {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.balance-amount h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.copy-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--text-secondary);
+}
+
+.last-transaction {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.action-buttons button {
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.move-money, .request {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+.transfer {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.activities-chart {
+    background: var(--card-background);
+    padding: 24px;
+    border-radius: 24px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container {
+    position: relative;
+    flex: 1;
+    min-height: 200px;
+    width: 100%;
+}
+
+canvas#activitiesChart {
+    flex: 1;
+    width: 100% !important;
+    height: calc(100% - 50px) !important;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.chart-header h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.chart-stats {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.percentage {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.percentage.positive {
+    color: var(--success-color);
+}
+
+.percentage.negative {
+    color: var(--danger-color);
+}
+
+/* Sección lateral */
+.side-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: calc(100vh - 40px);
+    position: sticky;
+    top: 20px;
+    overflow-y: auto;
+}
+
+.recent-transactions {
+    background: var(--card-background);
+    padding: 24px;
+    border-radius: 24px;
+    flex: 3;
+    overflow-y: auto;
+    max-height: calc(100vh - 400px);
+}
+
+.saving-wallets {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 24px;
+    flex: 1;
+    max-height: 250px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.add-new {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.total-savings {
+    margin-bottom: 24px;
+}
+
+.total-savings span {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.total-savings h3 {
+    font-size: 20px;
+    margin: 4px 0 0 0;
+}
+
+.wallets-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.wallet-card {
+    background: var(--secondary-color);
+    padding: 12px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.wallet-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(127, 61, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.wallet-name {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.wallet-amount {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.transaction-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.transaction-filters button {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.transaction-filters button.active {
+    background: var(--primary-color);
+}
+
+.transactions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-right: 8px;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.transaction-item:hover {
+    background: var(--secondary-color);
+}
+
+.transaction-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background: var(--secondary-color);
+}
+
+.transaction-info {
+    flex: 1;
+}
+
+.transaction-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.transaction-type {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.transaction-amount {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.transaction-amount.income {
+    color: var(--success-color);
+}
+
+.transaction-amount.expense {
+    color: var(--danger-color);
+}
+
+/* Estilos para el scroll */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* Estilos para el contenedor principal */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    min-height: 100vh;
+    overflow-y: auto;
+} 

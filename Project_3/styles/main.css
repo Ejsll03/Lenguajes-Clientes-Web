@@ -1,0 +1,234 @@
+:root {
+    /* Colores principales */
+    --primary-color: #7F3DFF;
+    --secondary-color: #2D2B3B;
+    --background-color: #13111C;
+    --card-background: #1F1D2B;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8F8F8F;
+    
+    /* Colores de estado */
+    --success-color: #00A86B;
+    --danger-color: #FF4B55;
+    --warning-color: #F1C40F;
+    
+    /* Colores de categorías */
+    --category-colors: {
+        'Alimentación': '#FF6B6B',
+        'Transporte': '#4ECDC4',
+        'Ocio': '#45B7D1',
+        'Vivienda': '#96CEB4',
+        'Salud': '#FFEEAD',
+        'Educación': '#D4A5A5',
+        'Otros': '#9B59B6'
+    }
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tab-content {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 24px;
+    margin-top: 20px;
+    width: 95%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2, h3, h4 {
+    color: var(--text-primary);
+}
+
+.income {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.expense {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+.positive {
+    color: var(--success-color);
+}
+
+.negative {
+    color: var(--danger-color);
+}
+
+/* styles/main.css */
+.transactions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filters-section {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-group {
+  margin-bottom: 15px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Estilos para iconos */
+.fas {
+    margin-right: 5px;
+    transition: transform 0.2s ease;
+}
+
+.fas:hover {
+    transform: scale(1.1);
+}
+
+/* Colores para iconos */
+.text-success {
+    color: #00A86B;
+}
+
+.text-danger {
+    color: #FF4B55;
+}
+
+.text-primary {
+    color: #007AFF;
+}
+
+/* Estilos para botones con iconos */
+button .fas {
+    margin-right: 8px;
+}
+
+.btn-primary .fas,
+.btn-secondary .fas {
+    font-size: 1.1em;
+}
+
+/* Estilos para botones de icono */
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.icon-btn .fas {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Estilos para botón de guardar */
+.save-btn {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+    transform: scale(1.1);
+    background: var(--secondary-color);
+}
+
+.save-btn .fas {
+    margin: 0;
+    font-size: 1.4em;
+    color: white;
+}
+
+/* Animación para iconos en botones */
+button:hover .fas {
+    transform: translateX(2px);
+}
+
+/* Estilos para iconos en formularios */
+.form-group label .fas {
+    color: #666;
+    width: 20px;
+    text-align: center;
+}
+
+/* Estilos para iconos en tablas */
+th .fas {
+    color: #666;
+    margin-right: 8px;
+}
+
+td .fas {
+    margin-right: 8px;
+}
+
+/* Estilos para iconos en la lista de categorías */
+.category-name .fas {
+    color: #666;
+}
+
+.delete-btn .fas {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.delete-btn:hover .fas {
+    transform: scale(1.2);
+    color: #FF4B55;
+}
