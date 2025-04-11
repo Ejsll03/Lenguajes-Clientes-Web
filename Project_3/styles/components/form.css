@@ -19,12 +19,15 @@
 .form-group input, 
 .form-group select {
     width: 100%;
-    padding: 8px;
+    height: 44px;
+    padding: 10px 12px;
     border: 1px solid var(--secondary-color);
     border-radius: 8px;
-    box-sizing: border-box;
-    background: var(--secondary-color);
+    background: var(--background);
     color: var(--text-primary);
+    font-size: 14px;
+    -webkit-appearance: none;
+    appearance: none;
 }
   
 button {
