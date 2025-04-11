@@ -203,15 +203,15 @@ table {
     }
     
     /* Ocultar columnas menos importantes en móviles */
-    .transaction-list th:nth-child(3),
+    /* .transaction-list th:nth-child(3),
     .transaction-list td:nth-child(3) {
         display: none;
     }
-    
+     */
     /* Ajustar el ancho de las columnas para mejor visualización */
     .transaction-list th:first-child,
     .transaction-list td:first-child {
-        width: 30%;
+        width: 25%;
     }
     
     .transaction-list th:last-child,
