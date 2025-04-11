@@ -1,377 +1,377 @@
 .transaction-form, .budget-form {
-  background: var(--card-background);
-  padding: 20px;
-  border-radius: 24px;
-  margin-bottom: 20px;
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 24px;
+    margin-bottom: 20px;
 }
-
+  
 .form-group {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
-
+  
 .form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: var(--text-primary);
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-primary);
 }
-
+  
 .form-group input, 
 .form-group select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  box-sizing: border-box;
-  background: var(--secondary-color);
-  color: var(--text-primary);
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: var(--secondary-color);
+    color: var(--text-primary);
 }
-
+  
 button {
-  background-color: var(--primary-color);
-  color: var(--text-primary);
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
 }
-
+  
 button:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
-
+  
 button.delete {
-  background-color: var(--danger-color);
+    background-color: var(--danger-color);
 }
-
+  
 button.delete:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 button.delete-btn {
-background-color: #ff6b6b;
-color: white;
-border: none;
-border-radius: 50%;
-width: 40px;
-height: 40px;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-font-size: 18px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 18px;
 }
 
 button.delete-btn i {
-color: white;
+  color: white;
 }
 
 button.delete-btn:hover {
-transform: scale(1.2);
-box-shadow: 0 4px 8px rgba(255, 107, 107, 0.5);
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.5);
 }
 
 button.edit-btn {
-background-color: #4caf50;
-color: white;
-border: none;
-border-radius: 50%;
-width: 40px;
-height: 40px;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-font-size: 18px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 18px;
 }
 
 button.edit-btn i {
-color: white;
+  color: white;
 }
 
 button.edit-btn:hover {
-transform: scale(1.2);
-box-shadow: 0 4px 8px rgba(76, 175, 80, 0.5);
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.5);
 }
 
 button.save-btn {
-background-color: #2196f3;
-color: white;
-border: none;
-border-radius: 50%;
-width: 50px;
-height: 50px;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-font-size: 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 20px;
 }
 
 button.save-btn i {
-color: white;
+  color: white;
 }
 
 button.save-btn:hover {
-transform: scale(1.2);
-box-shadow: 0 4px 8px rgba(33, 150, 243, 0.5);
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.5);
 }
 
 .category-manager {
-  padding: 20px;
+    padding: 20px;
 }
-
+  
 .category-form {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
-
+  
 .category-form input {
-  flex-grow: 1;
-  padding: 8px;
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  background: var(--secondary-color);
-  color: var(--text-primary);
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background: var(--secondary-color);
+    color: var(--text-primary);
 }
-
+  
 .category-list {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
-
+  
 .category-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--secondary-color);
 }
-
+  
 .category-list li:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
-
+  
 .category-name {
-  flex-grow: 1;
-  color: var(--text-primary);
+    flex-grow: 1;
+    color: var(--text-primary);
 }
-
+  
 .delete-category {
-  background-color: var(--danger-color);
-  color: var(--text-primary);
-  border: none;
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
+    background-color: var(--danger-color);
+    color: var(--text-primary);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
 }
-
+  
 .delete-category:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 /* Estilos para el formulario de presupuesto */
 .budget-form .form-group {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .budget-form select, 
 .budget-form input[type="number"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  box-sizing: border-box;
-  background: var(--secondary-color);
-  color: var(--text-primary);
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: var(--secondary-color);
+    color: var(--text-primary);
 }
 
 .budget-form label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: var(--text-primary);
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-primary);
 }
 
 .budget-amount-group {
-display: flex;
-align-items: center;
-gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .budget-amount-group input {
-flex: 1;
+  flex: 1;
 }
 
 .budget-list ul {
-list-style: none;
-padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .budget-list li {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 10px 0;
-border-bottom: 1px solid var(--secondary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--secondary-color);
 }
 
 .budget-list li:last-child {
-border-bottom: none;
+  border-bottom: none;
 }
 
 /* Media Queries for Forms */
 @media screen and (max-width: 768px) {
-  .transaction-form, .budget-form {
-      padding: 15px;
-      border-radius: 16px;
-      margin-bottom: 15px;
-  }
+    .transaction-form, .budget-form {
+        padding: 15px;
+        border-radius: 16px;
+        margin-bottom: 15px;
+    }
 
-  .form-group {
-      margin-bottom: 12px;
-  }
+    .form-group {
+        margin-bottom: 12px;
+    }
 
-  .form-group input, 
-  .form-group select {
-      padding: 6px;
-      font-size: 14px;
-  }
+    .form-group input, 
+    .form-group select {
+        padding: 6px;
+        font-size: 14px;
+    }
 
-  button {
-      padding: 8px 12px;
-      font-size: 14px;
-  }
+    button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
 
-  .category-form {
-      gap: 8px;
-      margin-bottom: 15px;
-  }
+    .category-form {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
 
-  .category-form input {
-      padding: 6px;
-      font-size: 14px;
-  }
+    .category-form input {
+        padding: 6px;
+        font-size: 14px;
+    }
 
-  .category-list li {
-      padding: 8px;
-  }
+    .category-list li {
+        padding: 8px;
+    }
 
-  button.delete-btn,
-  button.edit-btn {
-      width: 35px;
-      height: 35px;
-      font-size: 16px;
-  }
+    button.delete-btn,
+    button.edit-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
 
-  button.save-btn {
-      width: 45px;
-      height: 45px;
-      font-size: 18px;
-  }
+    button.save-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
 }
 
 @media screen and (max-width: 480px) {
-  .transaction-form, .budget-form {
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-  }
+    .transaction-form, .budget-form {
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+    }
 
-  .form-group {
-      margin-bottom: 10px;
-  }
+    .form-group {
+        margin-bottom: 10px;
+    }
 
-  .form-group label {
-      font-size: 14px;
-  }
+    .form-group label {
+        font-size: 14px;
+    }
 
-  .form-group input, 
-  .form-group select {
-      padding: 5px;
-      font-size: 13px;
-      height: 40px; /* Tamaño mínimo para inputs táctiles */
-  }
+    .form-group input, 
+    .form-group select {
+        padding: 5px;
+        font-size: 13px;
+        height: 40px; /* Tamaño mínimo para inputs táctiles */
+    }
 
-  button {
-      padding: 6px 10px;
-      font-size: 13px;
-      min-height: 40px; /* Tamaño mínimo para botones táctiles */
-  }
+    button {
+        padding: 6px 10px;
+        font-size: 13px;
+        min-height: 40px; /* Tamaño mínimo para botones táctiles */
+    }
 
-  .category-form {
-      flex-direction: column;
-      gap: 6px;
-  }
+    .category-form {
+        flex-direction: column;
+        gap: 6px;
+    }
 
-  .category-form input {
-      width: 100%;
-      height: 40px; /* Tamaño mínimo para inputs táctiles */
-  }
+    .category-form input {
+        width: 100%;
+        height: 40px; /* Tamaño mínimo para inputs táctiles */
+    }
 
-  .category-list li {
-      padding: 6px;
-      font-size: 13px;
-  }
+    .category-list li {
+        padding: 6px;
+        font-size: 13px;
+    }
 
-  button.delete-btn,
-  button.edit-btn {
-      width: 30px;
-      height: 30px;
-      font-size: 14px;
-  }
+    button.delete-btn,
+    button.edit-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
 
-  button.save-btn {
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
-  }
+    button.save-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
 
-  .budget-amount-group {
-      flex-direction: column;
-      gap: 6px;
-  }
+    .budget-amount-group {
+        flex-direction: column;
+        gap: 6px;
+    }
 
-  .budget-amount-group input {
-      width: 100%;
-      height: 40px; /* Tamaño mínimo para inputs táctiles */
-  }
-  
-  /* Mejoras para formularios en dispositivos móviles */
-  .form-group input[type="date"],
-  .form-group input[type="month"],
-  .form-group input[type="number"] {
-      font-size: 16px; /* Evita el zoom automático en iOS */
-  }
-  
-  /* Ajustar el espaciado para mejor usabilidad táctil */
-  .form-group label {
-      margin-bottom: 8px;
-      display: block;
-  }
-  
-  /* Mejorar la visualización de los botones de acción */
-  .actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
-  }
-  
-  .actions button {
-      flex: 1;
-      margin: 0 5px;
-  }
-  
-  .actions button:first-child {
-      margin-left: 0;
-  }
-  
-  .actions button:last-child {
-      margin-right: 0;
-  }
+    .budget-amount-group input {
+        width: 100%;
+        height: 40px; /* Tamaño mínimo para inputs táctiles */
+    }
+    
+    /* Mejoras para formularios en dispositivos móviles */
+    .form-group input[type="date"],
+    .form-group input[type="month"],
+    .form-group input[type="number"] {
+        font-size: 16px; /* Evita el zoom automático en iOS */
+    }
+    
+    /* Ajustar el espaciado para mejor usabilidad táctil */
+    .form-group label {
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    /* Mejorar la visualización de los botones de acción */
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+    
+    .actions button {
+        flex: 1;
+        margin: 0 5px;
+    }
+    
+    .actions button:first-child {
+        margin-left: 0;
+    }
+    
+    .actions button:last-child {
+        margin-right: 0;
+    }
 }
