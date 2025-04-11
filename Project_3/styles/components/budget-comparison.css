@@ -1,0 +1,99 @@
+.budget-comparison {
+    padding: 20px;
+}
+
+.months-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.month-card {
+    background: var(--card-background);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.month-card h3 {
+    margin: 0 0 15px 0;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.comparison-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.estimated, .actual {
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--background);
+}
+
+.estimated h4, .actual h4 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.income {
+    color: #00A86B;
+}
+
+.expense {
+    color: #FF4B55;
+}
+
+.balance {
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.categories {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.categories h4 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.categories ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.categories li {
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .months-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .months-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-section {
+        grid-template-columns: 1fr;
+    }
+} 

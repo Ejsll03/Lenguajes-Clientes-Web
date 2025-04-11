@@ -4,38 +4,47 @@
     color: var(--text-primary);
     min-height: 100vh;
     overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: 1fr 450px;
+    grid-template-columns: 2fr 1fr;
     gap: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-bottom: 24px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .main-section {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .dashboard-header {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
 }
 
-.dashboard-header h1 {
-    font-size: 28px;
-    margin: 0;
+.header-content {
+    flex: 1;
 }
 
-.dashboard-header p {
-    color: var(--text-secondary);
-    font-size: 14px;
+.header-content h1 {
+    font-size: 2rem;
+    color: #fff;
     margin: 0;
+    font-weight: 600;
+}
+
+.header-content p {
+    color: #91919F;
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
 }
 
 .period-selector {
@@ -96,35 +105,51 @@ input[type="month"]::-webkit-calendar-picker-indicator {
 
 .balance-card {
     background: var(--card-background);
+    border-radius: 16px;
     padding: 24px;
-    border-radius: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .balance-amount {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     margin-bottom: 16px;
 }
 
 .balance-amount h2 {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 2.5rem;
     margin: 0;
+    color: var(--text-primary);
+}
+
+.balance-amount h2.positive {
+    color: #00A86B;
+}
+
+.balance-amount h2.negative {
+    color: #FF4B55;
 }
 
 .copy-btn {
     background: none;
     border: none;
-    cursor: pointer;
-    padding: 4px;
     color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: var(--background);
+    color: var(--text-primary);
 }
 
 .last-transaction {
     color: var(--text-secondary);
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 0.9rem;
+    margin: 0;
 }
 
 .action-buttons {
@@ -211,28 +236,14 @@ canvas#activitiesChart {
 .side-section {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    height: calc(100vh - 40px);
-    position: sticky;
-    top: 20px;
-    overflow-y: auto;
+    gap: 20px;
 }
 
 .recent-transactions {
     background: var(--card-background);
-    padding: 24px;
-    border-radius: 24px;
-    flex: 3;
-    overflow-y: auto;
-    max-height: calc(100vh - 400px);
-}
-
-.saving-wallets {
-    background: var(--card-background);
+    border-radius: 16px;
     padding: 20px;
-    border-radius: 24px;
-    flex: 1;
-    max-height: 250px;
+    height: 100%;
 }
 
 .section-header {
@@ -243,151 +254,94 @@ canvas#activitiesChart {
 }
 
 .section-header h3 {
-    font-size: 18px;
     margin: 0;
-}
-
-.add-new {
-    background: var(--secondary-color);
+    font-size: 1.2rem;
     color: var(--text-primary);
-    border: none;
-    padding: 8px 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.total-savings {
-    margin-bottom: 24px;
-}
-
-.total-savings span {
-    color: var(--text-secondary);
-    font-size: 14px;
-}
-
-.total-savings h3 {
-    font-size: 20px;
-    margin: 4px 0 0 0;
-}
-
-.wallets-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.wallet-card {
-    background: var(--secondary-color);
-    padding: 12px;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.wallet-icon {
-    width: 32px;
-    height: 32px;
-    background: rgba(127, 61, 255, 0.1);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-}
-
-.wallet-name {
-    color: var(--text-secondary);
-    font-size: 12px;
-}
-
-.wallet-amount {
-    font-size: 14px;
-    font-weight: 500;
 }
 
 .transaction-filters {
     display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 10px;
 }
 
 .transaction-filters button {
-    background: var(--secondary-color);
-    color: var(--text-primary);
+    background: none;
     border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    color: var(--text-secondary);
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.transaction-filters button:hover {
+    background: var(--background);
+    color: var(--text-primary);
 }
 
 .transaction-filters button.active {
     background: var(--primary-color);
+    color: white;
 }
 
 .transactions-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding-right: 8px;
+    gap: 15px;
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
 }
 
 .transaction-item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 12px;
-    border-radius: 16px;
-    transition: background-color 0.3s ease;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--background);
+    transition: transform 0.2s ease;
 }
 
 .transaction-item:hover {
-    background: var(--secondary-color);
+    transform: translateX(5px);
 }
 
 .transaction-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--card-background);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    background: var(--secondary-color);
 }
 
 .transaction-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .transaction-name {
-    font-size: 16px;
+    color: var(--text-primary);
     font-weight: 500;
-    margin-bottom: 4px;
 }
 
 .transaction-type {
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .transaction-amount {
-    font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .transaction-amount.income {
-    color: var(--success-color);
+    color: #00A86B;
 }
 
 .transaction-amount.expense {
-    color: var(--danger-color);
+    color: #FF4B55;
 }
 
 /* Estilos para el scroll */
@@ -418,4 +372,250 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     min-height: 100vh;
     overflow-y: auto;
+}
+
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.month-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.month-selector button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.month-selector button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.current-month {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.month-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.year-text {
+    font-size: 0.8rem;
+    color: #91919F;
+}
+
+/* Media Queries for Dashboard */
+@media screen and (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .dashboard-container {
+        padding: 5px 15px 15px 15px;
+        width: 100%;
+    }
+
+    .activities-chart {
+        height: 350px;
+        padding: 20px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-container {
+        padding: 5px 10px 10px 10px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .dashboard-grid {
+        padding: 10px;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    .header-content {
+        width: 100%;
+    }
+
+    .header-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .balance-card {
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .activities-chart {
+        height: 300px;
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .chart-container {
+        width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .dashboard-container {
+        padding: 0;
+        width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .dashboard-grid {
+        gap: 8px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .header-content h1 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .header-content p {
+        font-size: 0.8rem;
+    }
+
+    .period-selector {
+        padding: 4px 8px;
+        gap: 6px;
+        width: auto;
+    }
+
+    .period-text {
+        font-size: 0.8rem;
+    }
+
+    .balance-card {
+        padding: 12px;
+        border-radius: 12px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .balance-amount {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .balance-amount h2 {
+        font-size: 1.5rem;
+    }
+
+    .activities-chart {
+        height: 200px;
+        padding: 10px;
+        border-radius: 12px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .chart-header h3 {
+        font-size: 1rem;
+    }
+
+    .chart-stats {
+        font-size: 0.8rem;
+    }
+
+    .percentage {
+        font-size: 0.9rem;
+    }
+
+    .recent-transactions {
+        padding: 10px;
+        border-radius: 12px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .transaction-item {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .transaction-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    .transaction-name {
+        font-size: 0.9rem;
+    }
+
+    .transaction-type {
+        font-size: 0.8rem;
+    }
+
+    .transaction-amount {
+        font-size: 0.9rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .action-buttons button {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+        height: 44px;
+        justify-content: center;
+    }
+
+    .transaction-filters {
+        flex-wrap: wrap;
+        gap: 4px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .transaction-filters button {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+        padding: 8px 4px;
+        font-size: 0.8rem;
+    }
 } 

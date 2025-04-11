@@ -1,10 +1,13 @@
+/* Estilos base del navbar */
 .main-nav {
     background-color: var(--card-background);
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 16px;
+    width: 100%;
 }
 
+/* Lista de navegación */
 .main-nav ul {
     list-style: none;
     padding: 0;
@@ -19,6 +22,7 @@
     margin: 0 0.5rem;
 }
 
+/* Botones de navegación */
 .main-nav .tab-button {
     background: none;
     border: none;
@@ -44,31 +48,112 @@
     background: var(--primary-color);
 }
 
-/* Añadir iconos a los botones */
 .main-nav .tab-button i {
     margin-right: 0.5rem;
 }
 
-/* Asegúrate de que los elementos del navbar se muestren correctamente */
-.main-nav ul {
+/* Botón del menú hamburguesa */
+.menu-toggle {
+    display: none;
+}
+
+/* Contenedor principal */
+.app-container {
     display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1rem;
 }
 
-.tab-button {
-    padding: 10px 15px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-primary);
+.main-content {
+    flex: 1;
+    width: 100%;
 }
 
-.tab-button:hover {
-    background-color: var(--secondary-color);
+.tab-content {
+    width: 100%;
 }
 
-.tab-button.active {
-    background-color: var(--primary-color);
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 700px) {
+    .app-container {
+        padding: 0;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        background-color: var(--card-background);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        z-index: 1000;
+    }
+
+    /* Botón hamburguesa */
+    .menu-toggle {
+        display: block;
+        width: 44px;
+        height: 44px;
+        margin-right: 10px;
+        padding: 10px;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .menu-toggle:active {
+        opacity: 0.8;
+    }
+
+    /* Lista de navegación en móvil */
+    .main-nav ul {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: var(--card-background);
+        flex-direction: column;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .main-nav ul.show {
+        display: flex;
+    }
+
+    .main-nav li {
+        margin: 5px 0;
+        width: 100%;
+    }
+
+    .main-nav .tab-button {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 15px;
+        margin: 0;
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    .main-content {
+        margin-top: 60px;
+        padding: 1rem;
+    }
+
+    .tab-content {
+        padding-top: 1rem;
+    }
 }

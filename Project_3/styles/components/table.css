@@ -1,98 +1,221 @@
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid var(--secondary-color);
-  }
-  
-  th {
-    background-color: var(--card-background);
-    color: var(--text-primary);
-  }
-  
-  tr:hover {
-    background-color: var(--secondary-color);
-  }
-  
-  .total-card {
-    background: var(--card-background);
-    padding: 15px;
-    border-radius: 16px;
-    margin: 10px;
-    display: inline-block;
-    min-width: 200px;
-  }
-  
-  .totals {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px 0;
-  }
-  
-  .month-section {
-    background: var(--card-background);
-    padding: 20px;
-    border-radius: 24px;
-    margin-bottom: 30px;
-  }
-
-  /* styles/components/table.css */
-.transaction-list table {
   width: 100%;
   border-collapse: collapse;
+  margin: 20px 0;
 }
 
-.transaction-list th {
-  background-color: var(--card-background);
-  color: var(--text-primary);
+th, td {
   padding: 12px;
   text-align: left;
-}
-
-.transaction-list td {
-  padding: 10px 12px;
   border-bottom: 1px solid var(--secondary-color);
 }
 
-.transaction-list tr:hover {
+th {
+  background-color: var(--card-background);
+  color: var(--text-primary);
+}
+
+tr:hover {
   background-color: var(--secondary-color);
 }
 
+.total-card {
+  background: var(--card-background);
+  padding: 15px;
+  border-radius: 16px;
+  margin: 10px;
+  display: inline-block;
+  min-width: 200px;
+}
+
+.totals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.month-section {
+  background: var(--card-background);
+  padding: 20px;
+  border-radius: 24px;
+  margin-bottom: 30px;
+}
+
+/* styles/components/table.css */
+.transaction-list table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.transaction-list th {
+background-color: var(--card-background);
+color: var(--text-primary);
+padding: 12px;
+text-align: left;
+}
+
+.transaction-list td {
+padding: 10px 12px;
+border-bottom: 1px solid var(--secondary-color);
+}
+
+.transaction-list tr:hover {
+background-color: var(--secondary-color);
+}
+
 .income {
-  color: #28a745;
-  font-weight: 500;
+color: #28a745;
+font-weight: 500;
 }
 
 .expense {
-  color: #dc3545;
-  font-weight: 500;
+color: #dc3545;
+font-weight: 500;
 }
 
 .actions {
-  display: flex;
-  gap: 8px;
+display: flex;
+gap: 8px;
 }
 
 .edit-btn, .delete-btn {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 13px;
+padding: 5px 10px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-size: 13px;
 }
 
 .edit-btn {
-  background-color: var(--primary-color);
-  color: var(--text-primary);
+background-color: var(--primary-color);
+color: var(--text-primary);
 }
 
 .delete-btn {
-  background-color: var(--danger-color);
-  color: var(--text-primary);
+background-color: var(--danger-color);
+color: var(--text-primary);
+}
+
+/* Media Queries for Tables */
+@media screen and (max-width: 768px) {
+  table {
+      margin: 15px 0;
+  }
+
+  th, td {
+      padding: 10px;
+      font-size: 14px;
+  }
+
+  .total-card {
+      padding: 12px;
+      min-width: 180px;
+      margin: 8px;
+  }
+
+  .totals {
+      margin: 15px 0;
+  }
+
+  .month-section {
+      padding: 15px;
+      margin-bottom: 20px;
+  }
+
+  .transaction-list th,
+  .transaction-list td {
+      padding: 8px 10px;
+      font-size: 14px;
+  }
+
+  .actions {
+      gap: 6px;
+  }
+
+  .edit-btn, .delete-btn {
+      padding: 4px 8px;
+      font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      max-width: 100%;
+  }
+
+  th, td {
+      padding: 8px;
+      font-size: 13px;
+  }
+
+  .total-card {
+      padding: 10px;
+      min-width: 150px;
+      margin: 6px;
+      font-size: 13px;
+  }
+
+  .totals {
+      margin: 12px 0;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .month-section {
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 16px;
+  }
+
+  .transaction-list th,
+  .transaction-list td {
+      padding: 6px 8px;
+      font-size: 13px;
+  }
+
+  .actions {
+      gap: 4px;
+  }
+
+  .edit-btn, .delete-btn {
+      padding: 3px 6px;
+      font-size: 11px;
+      min-width: 36px;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  /* Mejoras para tablas en dispositivos móviles */
+  .transaction-list {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+  
+  .transaction-list table {
+      min-width: 100%;
+  }
+  
+  /* Ocultar columnas menos importantes en móviles */
+  .transaction-list th:nth-child(3),
+  .transaction-list td:nth-child(3) {
+      display: none;
+  }
+  
+  /* Ajustar el ancho de las columnas para mejor visualización */
+  .transaction-list th:first-child,
+  .transaction-list td:first-child {
+      width: 30%;
+  }
+  
+  .transaction-list th:last-child,
+  .transaction-list td:last-child {
+      width: 20%;
+  }
 }
