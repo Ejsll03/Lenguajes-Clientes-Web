@@ -23,11 +23,11 @@ export class TransactionForm {
         </div>
         <div class="form-group budget-amount-group">
           <label><i class="fas fa-dollar-sign"></i> Monto:</label>
-          <input type="number" id="transaction-amount" min="0" step="0.01" required>
+          <input type="number" id="transaction-amount" min="0" step="0.01" required placeholder="0.00">
         </div>
         <div class="form-group">
           <label><i class="fas fa-calendar-alt"></i> Fecha:</label>
-          <input type="date" id="transaction-date" required max="${today}">
+          <input type="date" id="transaction-date" required max="${today}" value="${today}">
         </div>
         <div class="form-group">
           <label><i class="fas fa-tags"></i> Categoría:</label>
