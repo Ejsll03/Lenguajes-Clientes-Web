@@ -11,14 +11,71 @@ export class Dashboard {
     }
 
     init() {
-        this.render();
-        this.setupEventListeners();
+        const dashboard = this.render();
+        document.querySelector('#main').appendChild(dashboard);
+        
+        // Asegurarse de que el DOM esté listo antes de configurar los event listeners
+        setTimeout(() => {
+            this.setupEventListeners();
+            this.updateDashboard();
+        }, 0);
     }
 
     setupEventListeners() {
-        const calendarBtn = document.querySelector('.calendar-btn');
-        if (calendarBtn) {
-            calendarBtn.addEventListener('click', () => this.showMonthPicker());
+        /* // Eventos para navegación de meses
+        const prevMonthBtn = document.querySelector('.prev-month');
+        const nextMonthBtn = document.querySelector('.next-month');
+        
+        if (prevMonthBtn) {
+            prevMonthBtn.addEventListener('click', () => {
+                if (this.selectedMonth === 0) {
+                    this.selectedMonth = 11;
+                    this.selectedYear--;
+                } else {
+                    this.selectedMonth--;
+                }
+                this.updateDashboard();
+            });
+        }
+
+        if (nextMonthBtn) {
+            nextMonthBtn.addEventListener('click', () => {
+                if (this.selectedMonth === 11) {
+                    this.selectedMonth = 0;
+                    this.selectedYear++;
+                } else {
+                    this.selectedMonth++;
+                }
+                this.updateDashboard();
+            });
+        } */
+
+        // Eventos para filtros de transacciones
+        const filterButtons = document.querySelectorAll('.transaction-filters button');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const filter = e.target.getAttribute('data-filter');
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                let filteredTransactions = this.getRecentTransactions();
+                if (filter !== 'all') {
+                    filteredTransactions = filteredTransactions.filter(t => t.type === filter);
+                }
+                
+                this.updateTransactionsList(filteredTransactions);
+            });
+        });
+
+        // Evento para copiar balance
+        const copyBtn = document.querySelector('.copy-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                const balance = document.querySelector('.balance-amount h2').textContent.replace('$', '');
+                navigator.clipboard.writeText(balance)
+                    .then(() => alert('Balance copiado al portapapeles'))
+                    .catch(err => console.error('Error al copiar:', err));
+            });
         }
     }
 
@@ -38,10 +95,14 @@ export class Dashboard {
     }
 
     updateDashboard() {
-        // Actualizar el período mostrado
-        const periodText = document.querySelector('.period-text');
-        if (periodText) {
-            periodText.textContent = `${this.monthNames[this.selectedMonth]} ${this.selectedYear}`;
+        // Actualizar el mes y año mostrados
+        const monthText = document.querySelector('.month-text');
+        const yearText = document.querySelector('.year-text');
+        if (monthText) {
+            monthText.textContent = this.monthNames[this.selectedMonth];
+        }
+        if (yearText) {
+            yearText.textContent = this.selectedYear;
         }
 
         // Filtrar transacciones por mes seleccionado
@@ -62,13 +123,20 @@ export class Dashboard {
     }
 
     updateBalance(filteredTransactions) {
-        const balance = filteredTransactions.reduce((acc, curr) => {
-            return curr.type === 'income' ? acc + curr.amount : acc - curr.amount;
-        }, 0);
+        const ingresos = filteredTransactions
+            .filter(t => t.type === 'income')
+            .reduce((total, t) => total + t.amount, 0);
+            
+        const egresos = filteredTransactions
+            .filter(t => t.type === 'expense')
+            .reduce((total, t) => total + t.amount, 0);
+            
+        const balance = ingresos - egresos;
 
         const balanceElement = document.querySelector('.balance-amount h2');
         if (balanceElement) {
             balanceElement.textContent = `$${balance.toFixed(2)}`;
+            balanceElement.className = balance >= 0 ? 'positive' : 'negative';
         }
     }
 
@@ -77,8 +145,8 @@ export class Dashboard {
         if (!ctx) return;
 
         const monthlyData = this.calculateMonthlyData();
-        const totalIncome = monthlyData.incomes.reduce((a, b) => a + b, 0);
-        const totalExpenses = monthlyData.expenses.reduce((a, b) => a + b, 0);
+        const totalIncome = monthlyData.totalIncome;
+        const totalExpenses = monthlyData.totalExpenses;
         const percentageChange = totalExpenses > 0 ? 
             ((totalIncome - totalExpenses) / totalExpenses * 100).toFixed(1) : 
             totalIncome > 0 ? 100 : 0;
@@ -104,7 +172,8 @@ export class Dashboard {
                         borderColor: '#00A86B',
                         backgroundColor: 'rgba(0, 168, 107, 0.1)',
                         tension: 0.4,
-                        fill: true
+                        fill: true,
+                        yAxisID: 'y'
                     },
                     {
                         label: 'Gastos',
@@ -112,13 +181,27 @@ export class Dashboard {
                         borderColor: '#FF4B55',
                         backgroundColor: 'rgba(255, 75, 85, 0.1)',
                         tension: 0.4,
-                        fill: true
+                        fill: true,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Balance Acumulado',
+                        data: monthlyData.balance,
+                        borderColor: '#7F3DFF',
+                        backgroundColor: 'rgba(127, 61, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y1'
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
                 plugins: {
                     legend: {
                         position: 'top',
@@ -130,10 +213,30 @@ export class Dashboard {
                                 size: 11
                             }
                         }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('es-MX', {
+                                        style: 'currency',
+                                        currency: 'MXN'
+                                    }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
                     }
                 },
                 scales: {
                     y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
                         beginAtZero: true,
                         grid: {
                             color: 'rgba(255, 255, 255, 0.1)'
@@ -143,7 +246,36 @@ export class Dashboard {
                             font: {
                                 size: 10
                             },
-                            maxTicksLimit: 5
+                            maxTicksLimit: 5,
+                            callback: function(value) {
+                                return new Intl.NumberFormat('es-MX', {
+                                    style: 'currency',
+                                    currency: 'MXN',
+                                    maximumFractionDigits: 0
+                                }).format(value);
+                            }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: false
+                        },
+                        ticks: {
+                            color: '#fff',
+                            font: {
+                                size: 10
+                            },
+                            maxTicksLimit: 5,
+                            callback: function(value) {
+                                return new Intl.NumberFormat('es-MX', {
+                                    style: 'currency',
+                                    currency: 'MXN',
+                                    maximumFractionDigits: 0
+                                }).format(value);
+                            }
                         }
                     },
                     x: {
@@ -157,6 +289,18 @@ export class Dashboard {
                             },
                             maxTicksLimit: 10,
                             maxRotation: 0
+                        },
+                        title: {
+                            display: true,
+                            text: 'Días del mes',
+                            color: '#fff',
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            padding: {
+                                top: 10
+                            }
                         }
                     }
                 },
@@ -185,12 +329,23 @@ export class Dashboard {
         const transactionsList = document.querySelector('.transactions-list');
         if (!transactionsList) return;
 
-        transactionsList.innerHTML = '';
-        
-        filteredTransactions.forEach(transaction => {
-            const transactionElement = this.createTransactionElement(transaction);
-            transactionsList.appendChild(transactionElement);
-        });
+        transactionsList.innerHTML = filteredTransactions.map(t => `
+            <div class="transaction-item">
+                <div class="transaction-icon">
+                    <i class="fas ${t.type === 'income' ? 'fa-arrow-down' : 'fa-arrow-up'}"
+                       style="color: ${t.type === 'income' ? '#00A86B' : '#FF4B55'}"></i>
+                </div>
+                <div class="transaction-info">
+                    <span class="transaction-name">${t.category}</span>
+                    <span class="transaction-type">
+                        ${t.type === 'income' ? 'Ingreso' : 'Gasto'} • ${new Date(t.date).toLocaleDateString()}
+                    </span>
+                </div>
+                <span class="transaction-amount ${t.type}">
+                    ${t.type === 'income' ? '+' : '-'}$${t.amount.toFixed(2)}
+                </span>
+            </div>
+        `).join('');
     }
 
     getCurrentMonthPeriod() {
@@ -215,34 +370,6 @@ export class Dashboard {
             .slice(0, limit);
     }
 
-    calculateSavingsWallets() {
-        const categories = [...new Set(this.transactions.map(t => t.category))];
-        const wallets = categories.map(category => {
-            const transactions = this.transactions.filter(t => t.category === category);
-            const total = transactions.reduce((sum, t) => {
-                return sum + (t.type === 'income' ? t.amount : -t.amount);
-            }, 0);
-            
-            const icons = {
-                'Alimentación': '🍽️',
-                'Transporte': '🚗',
-                'Ocio': '🎮',
-                'Vivienda': '🏠',
-                'Salud': '🏥',
-                'Educación': '📚',
-                'Otros': '📦'
-            };
-
-            return {
-                name: category,
-                amount: Math.abs(total),
-                icon: icons[category] || '💰'
-            };
-        });
-
-        return wallets.sort((a, b) => b.amount - a.amount).slice(0, 4);
-    }
-
     calculateMonthlyData() {
         // Crear fecha para el primer y último día del mes seleccionado
         const startDate = new Date(this.selectedYear, this.selectedMonth, 1);
@@ -257,17 +384,41 @@ export class Dashboard {
         const days = [...Array(daysInMonth).keys()].map(i => i + 1);
         const incomes = Array(daysInMonth).fill(0);
         const expenses = Array(daysInMonth).fill(0);
+        const balance = Array(daysInMonth).fill(0);
+        let runningBalance = 0;
 
         filteredTransactions.forEach(t => {
             const day = new Date(t.date).getDate() - 1;
             if (t.type === 'income') {
                 incomes[day] += t.amount;
+                runningBalance += t.amount;
             } else {
                 expenses[day] += t.amount;
+                runningBalance -= t.amount;
             }
+            balance[day] = runningBalance;
         });
 
-        return { days, incomes, expenses };
+        // Calcular totales y promedios
+        const totalIncome = incomes.reduce((a, b) => a + b, 0);
+        const totalExpenses = expenses.reduce((a, b) => a + b, 0);
+        const averageIncome = totalIncome / daysInMonth;
+        const averageExpenses = totalExpenses / daysInMonth;
+        const maxBalance = Math.max(...balance);
+        const minBalance = Math.min(...balance);
+
+        return { 
+            days, 
+            incomes, 
+            expenses, 
+            balance,
+            totalIncome,
+            totalExpenses,
+            averageIncome,
+            averageExpenses,
+            maxBalance,
+            minBalance
+        };
     }
 
     getTimeAgo(date) {
@@ -293,38 +444,44 @@ export class Dashboard {
                    transactionDate.getFullYear() === this.selectedYear;
         });
         
-        const balance = filteredTransactions.reduce((total, t) => {
-            return total + (t.type === 'income' ? t.amount : -t.amount);
-        }, 0);
+        // Calcular ingresos y egresos por separado
+        const ingresos = filteredTransactions
+            .filter(t => t.type === 'income')
+            .reduce((total, t) => total + t.amount, 0);
+            
+        const egresos = filteredTransactions
+            .filter(t => t.type === 'expense')
+            .reduce((total, t) => total + t.amount, 0);
+            
+        const balance = ingresos - egresos;
         
-        const lastTransaction = filteredTransactions.length > 0 ? 
-            [...filteredTransactions].sort((a, b) => new Date(b.date) - new Date(a.date))[0] : null;
+        const lastTransaction = this.transactions.length > 0 ? 
+            [...this.transactions].sort((a, b) => new Date(b.date) - new Date(a.date))[0] : null;
         const timeAgo = lastTransaction ? this.getTimeAgo(new Date(lastTransaction.date)) : 'No hay transacciones';
-        const wallets = this.calculateSavingsWallets();
-        const totalSavings = wallets.reduce((sum, wallet) => sum + wallet.amount, 0);
-        const transactions = this.getRecentTransactions();
-        
-        const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-        const currentMonth = monthNames[new Date().getMonth()];
+        const recentTransactions = this.getRecentTransactions();
+        const currentMonth = this.monthNames[new Date().getMonth()];
 
         dashboard.innerHTML = `
             <div class="dashboard-grid">
                 <div class="main-section">
                     <div class="dashboard-header">
-                        <h1>Dashboard</h1>
-                        <p>Vista general de ${currentMonth}</p>
-                        <div class="period-selector">
-                            <span class="period-text">${this.monthNames[this.selectedMonth]} ${this.selectedYear}</span>
-                            <button class="calendar-btn">
-                                <i class="fas fa-calendar"></i>
-                            </button>
+                        <div class="header-content">
+                            <h1>Dashboard</h1>
+                            <p>Vista general de ${currentMonth}</p>
+                        </div>
+                        <div class="month-selector">
+                            <button class="prev-month" title="Mes anterior"></button>
+                            <div class="current-month">
+                                <span class="month-text">${this.monthNames[this.selectedMonth]}</span>
+                                <span class="year-text">${this.selectedYear}</span>
+                            </div>
+                            <button class="next-month" title="Mes siguiente"></button>
                         </div>
                     </div>
 
                     <div class="balance-card">
                         <div class="balance-amount">
-                            <h2>$${balance.toLocaleString('es-MX', {minimumFractionDigits: 2})}</h2>
+                            <h2 class="${balance >= 0 ? 'positive' : 'negative'}">$${balance.toLocaleString('es-MX', {minimumFractionDigits: 2})}</h2>
                             <button class="copy-btn" title="Copiar al portapapeles">
                                 <i class="fas fa-copy"></i>
                             </button>
@@ -332,17 +489,6 @@ export class Dashboard {
                         <p class="last-transaction">
                             Última transacción: ${lastTransaction ? `${lastTransaction.type === 'income' ? 'Ingreso' : 'Gasto'} de $${lastTransaction.amount.toFixed(2)} en ${lastTransaction.category}` : 'No hay transacciones'} • ${timeAgo}
                         </p>
-                        <div class="action-buttons">
-                            <button class="move-money">
-                                <i class="fas fa-exchange-alt"></i> Mover Dinero
-                            </button>
-                            <button class="request">
-                                <i class="fas fa-hand-holding-usd"></i> Solicitar
-                            </button>
-                            <button class="transfer">
-                                <i class="fas fa-paper-plane"></i> Transferir
-                            </button>
-                        </div>
                     </div>
 
                     <div class="activities-chart">
@@ -368,7 +514,7 @@ export class Dashboard {
                             </div>
                         </div>
                         <div class="transactions-list">
-                            ${transactions.map(t => `
+                            ${recentTransactions.map(t => `
                                 <div class="transaction-item">
                                     <div class="transaction-icon">
                                         <i class="fas ${t.type === 'income' ? 'fa-arrow-down' : 'fa-arrow-up'}"
@@ -383,28 +529,6 @@ export class Dashboard {
                                     <span class="transaction-amount ${t.type}">
                                         ${t.type === 'income' ? '+' : '-'}$${t.amount.toFixed(2)}
                                     </span>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <div class="saving-wallets">
-                        <div class="section-header">
-                            <h3>Carteras de Ahorro</h3>
-                            <button class="add-new">
-                                <i class="fas fa-plus"></i> Agregar
-                            </button>
-                        </div>
-                        <div class="total-savings">
-                            <span>Ahorros Totales</span>
-                            <h3>$${totalSavings.toLocaleString('es-MX', {minimumFractionDigits: 2})}</h3>
-                        </div>
-                        <div class="wallets-grid">
-                            ${wallets.map(wallet => `
-                                <div class="wallet-card">
-                                    <span class="wallet-icon">${wallet.icon}</span>
-                                    <span class="wallet-name">${wallet.name}</span>
-                                    <span class="wallet-amount">$${wallet.amount.toLocaleString('es-MX', {minimumFractionDigits: 2})}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -433,23 +557,7 @@ export class Dashboard {
                     filteredTransactions = filteredTransactions.filter(t => t.type === filter);
                 }
                 
-                dashboard.querySelector('.transactions-list').innerHTML = filteredTransactions.map(t => `
-                    <div class="transaction-item">
-                        <div class="transaction-icon">
-                            <i class="fas ${t.type === 'income' ? 'fa-arrow-down' : 'fa-arrow-up'}"
-                               style="color: ${t.type === 'income' ? '#00A86B' : '#FF4B55'}"></i>
-                        </div>
-                        <div class="transaction-info">
-                            <span class="transaction-name">${t.category}</span>
-                            <span class="transaction-type">
-                                ${t.type === 'income' ? 'Ingreso' : 'Gasto'} • ${new Date(t.date).toLocaleDateString()}
-                            </span>
-                        </div>
-                        <span class="transaction-amount ${t.type}">
-                            ${t.type === 'income' ? '+' : '-'}$${t.amount.toFixed(2)}
-                        </span>
-                    </div>
-                `).join('');
+                this.updateTransactionsList(filteredTransactions);
             });
         });
 
@@ -457,9 +565,12 @@ export class Dashboard {
         setTimeout(() => {
             const ctx = dashboard.querySelector('#activitiesChart').getContext('2d');
             const monthlyData = this.calculateMonthlyData();
-            const totalIncome = monthlyData.incomes.reduce((a, b) => a + b, 0);
-            const totalExpenses = monthlyData.expenses.reduce((a, b) => a + b, 0);
-            const percentageChange = ((totalIncome - totalExpenses) / totalExpenses * 100).toFixed(1);
+            
+            const totalIncome = monthlyData.totalIncome;
+            const totalExpenses = monthlyData.totalExpenses;
+            const percentageChange = totalExpenses > 0 ? 
+                ((totalIncome - totalExpenses) / totalExpenses * 100).toFixed(1) : 
+                totalIncome > 0 ? 100 : 0;
             
             dashboard.querySelector('.percentage').textContent = 
                 `${percentageChange >= 0 ? '+' : ''}${percentageChange}%`;
@@ -480,7 +591,8 @@ export class Dashboard {
                             borderColor: '#00A86B',
                             backgroundColor: 'rgba(0, 168, 107, 0.1)',
                             tension: 0.4,
-                            fill: true
+                            fill: true,
+                            yAxisID: 'y'
                         },
                         {
                             label: 'Gastos',
@@ -488,13 +600,27 @@ export class Dashboard {
                             borderColor: '#FF4B55',
                             backgroundColor: 'rgba(255, 75, 85, 0.1)',
                             tension: 0.4,
-                            fill: true
+                            fill: true,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Balance Acumulado',
+                            data: monthlyData.balance,
+                            borderColor: '#7F3DFF',
+                            backgroundColor: 'rgba(127, 61, 255, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y1'
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
                     plugins: {
                         legend: {
                             position: 'top',
@@ -506,10 +632,30 @@ export class Dashboard {
                                     size: 11
                                 }
                             }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('es-MX', {
+                                            style: 'currency',
+                                            currency: 'MXN'
+                                        }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
                         }
                     },
                     scales: {
                         y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
                             beginAtZero: true,
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -519,7 +665,36 @@ export class Dashboard {
                                 font: {
                                     size: 10
                                 },
-                                maxTicksLimit: 5
+                                maxTicksLimit: 5,
+                                callback: function(value) {
+                                    return new Intl.NumberFormat('es-MX', {
+                                        style: 'currency',
+                                        currency: 'MXN',
+                                        maximumFractionDigits: 0
+                                    }).format(value);
+                                }
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: 10
+                                },
+                                maxTicksLimit: 5,
+                                callback: function(value) {
+                                    return new Intl.NumberFormat('es-MX', {
+                                        style: 'currency',
+                                        currency: 'MXN',
+                                        maximumFractionDigits: 0
+                                    }).format(value);
+                                }
                             }
                         },
                         x: {
@@ -533,6 +708,18 @@ export class Dashboard {
                                 },
                                 maxTicksLimit: 10,
                                 maxRotation: 0
+                            },
+                            title: {
+                                display: true,
+                                text: 'Días del mes',
+                                color: '#fff',
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                },
+                                padding: {
+                                    top: 10
+                                }
                             }
                         }
                     },
@@ -556,14 +743,6 @@ export class Dashboard {
                 }
             });
         }, 0);
-
-        // Añadir evento al botón de agregar cartera
-        dashboard.querySelector('.add-new').addEventListener('click', () => {
-            alert('Funcionalidad de agregar cartera en desarrollo');
-        });
-
-        // Inicializar con los datos del mes actual
-        this.updateDashboard();
 
         return dashboard;
     }

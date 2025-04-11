@@ -81,16 +81,24 @@ class FinanceApp {
   render() {
     document.body.innerHTML = '';
     
-    // Render navbar
+    // Crear el contenedor principal
+    const appContainer = document.createElement('div');
+    appContainer.className = 'app-container';
+    
+    // Crear el navbar
     const navbar = new Navbar((tab) => {
       this.currentTab = tab;
       this.renderContent();
     });
-    document.body.appendChild(navbar.render());
     
-    // Main container
+    // Crear el contenedor principal del contenido
     this.mainContainer = document.createElement('main');
-    document.body.appendChild(this.mainContainer);
+    this.mainContainer.className = 'main-content';
+    
+    // Agregar elementos al DOM
+    appContainer.appendChild(navbar.render());
+    appContainer.appendChild(this.mainContainer);
+    document.body.appendChild(appContainer);
     
     this.renderContent();
   }
@@ -98,29 +106,31 @@ class FinanceApp {
   renderContent() {
     this.mainContainer.innerHTML = '';
     
+    const contentContainer = document.createElement('div');
+    contentContainer.className = 'tab-content';
+    
     switch (this.currentTab) {
       case 'dashboard':
-        this.renderDashboardTab();
+        this.renderDashboardTab(contentContainer);
         break;
       case 'transactions':
-        this.renderTransactionsTab();
+        this.renderTransactionsTab(contentContainer);
         break;
       case 'budgets':
-        this.renderBudgetsTab();
+        this.renderBudgetsTab(contentContainer);
         break;
       case 'comparison':
-        this.renderComparisonTab();
+        this.renderComparisonTab(contentContainer);
         break;
       case 'categories':
-        this.renderCategoriesTab();
+        this.renderCategoriesTab(contentContainer);
         break;
     }
+    
+    this.mainContainer.appendChild(contentContainer);
   }
 
-  async renderTransactionsTab() {
-    const container = document.createElement('div');
-    container.className = 'tab-content';
-    
+  async renderTransactionsTab(container) {
     // Transaction form
     const transactionForm = new TransactionForm(
       async (transaction) => {
@@ -171,14 +181,9 @@ class FinanceApp {
     
     const transactionsChart = new SimpleChart(this.transactions, 'transactions', this.categories);
     container.appendChild(transactionsChart.render());
-    
-    this.mainContainer.appendChild(container);
   }
 
-  async renderBudgetsTab() {
-    const container = document.createElement('div');
-    container.className = 'tab-content';
-    
+  async renderBudgetsTab(container) {
     // Budget form
     const budgetForm = new BudgetForm(
       async (budget) => {
@@ -242,14 +247,9 @@ class FinanceApp {
     
     const budgetsChart = new SimpleChart(this.budgets, 'budgets', this.categories);
     container.appendChild(budgetsChart.render());
-    
-    this.mainContainer.appendChild(container);
   }
 
-  async renderComparisonTab() {
-    const container = document.createElement('div');
-    container.className = 'tab-content';
-    
+  async renderComparisonTab(container) {
     const comparison = new BudgetComparison(this.budgets, this.transactions);
     container.appendChild(comparison.render());
     
@@ -266,14 +266,9 @@ class FinanceApp {
     
     const charts = new FinanceCharts(this.budgets, this.transactions);
     container.appendChild(charts.render());
-    
-    this.mainContainer.appendChild(container);
   }
 
-  renderCategoriesTab() {
-    const container = document.createElement('div');
-    container.className = 'tab-content';
-    
+  renderCategoriesTab(container) {
     const categoryManager = new CategoryManager(
       this.db,
       async (updatedCategories) => {
@@ -283,10 +278,9 @@ class FinanceApp {
     );
     
     container.appendChild(categoryManager.render());
-    this.mainContainer.appendChild(container);
   }
 
-  async renderDashboardTab() {
+  async renderDashboardTab(container) {
     if (!this.chartLoaded) {
       try {
         await this.loadChartJS();
@@ -298,7 +292,7 @@ class FinanceApp {
     }
 
     const dashboard = new Dashboard(this.transactions, this.budgets);
-    this.mainContainer.appendChild(dashboard.render());
+    container.appendChild(dashboard.render());
   }
 }
 

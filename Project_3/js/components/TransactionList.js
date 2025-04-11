@@ -106,7 +106,7 @@ export class TransactionList {
     // Event listeners para botones
     table.querySelectorAll('.edit-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
+        const id = e.target.closest('.edit-btn').getAttribute('data-id');
         const transaction = this.transactions.find(t => t.id === id);
         this.onEdit(transaction);
       });
@@ -114,7 +114,7 @@ export class TransactionList {
 
     table.querySelectorAll('.delete-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
+        const id = e.target.closest('.delete-btn').getAttribute('data-id');
         this.onDelete(id);
       });
     });
